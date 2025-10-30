@@ -1,10 +1,12 @@
 const startButton = document.getElementById("start");
 const menu = document.getElementById("menu");
 const modeButton = document.getElementById("gameMode");
+const countDisplay = document.getElementById("countDisplay");
+let count = 0;
+
 modeButton.textContent = "Normal";
 
 modeButton.addEventListener("click", toggleMode);
-
 startButton.addEventListener("click", startGame);
 
 function toggleMode() {
@@ -24,7 +26,7 @@ function startGame() {
   applyTargetStyle(target);
   moveTarget(target);
   document.body.appendChild(target);
-  target.addEventListener("click", () => moveTarget(target));
+  target.addEventListener("click", () => onTargetClick(target));
 }
 
 function applyTargetStyle(target) {
@@ -39,4 +41,10 @@ function moveTarget(target) {
   const y = Math.random() * (window.innerHeight - 200);
   target.style.left = `${x}px`;
   target.style.top = `${y}px`;
+}
+
+function onTargetClick(target) {
+  moveTarget(target);
+  count++;
+  countDisplay.textContent = count;
 }
