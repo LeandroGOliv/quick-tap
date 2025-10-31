@@ -2,7 +2,9 @@ const startButton = document.getElementById("start");
 const menu = document.getElementById("menu");
 const modeButton = document.getElementById("gameMode");
 const countDisplay = document.getElementById("countDisplay");
+let isStarted = false;
 let count = 0;
+let timeoutId;
 
 modeButton.textContent = "Normal";
 
@@ -20,13 +22,14 @@ function toggleMode() {
 }
 
 function startGame() {
-  console.log("starting...");
   const target = document.createElement("div");
+  countDisplay.textContent = "Contador:";
   target.id = "target";
   applyTargetStyle(target);
   moveTarget(target);
   document.body.appendChild(target);
   target.addEventListener("click", () => onTargetClick(target));
+  startTimeout(target);
 }
 
 function applyTargetStyle(target) {
@@ -37,14 +40,22 @@ function applyTargetStyle(target) {
 }
 
 function moveTarget(target) {
-  const x = Math.random() * (window.innerWidth - 400);
-  const y = Math.random() * (window.innerHeight - 200);
+  const x = Math.random() * (window.innerWidth - 1000);
+  const y = Math.random() * (window.innerHeight - 500);
   target.style.left = `${x}px`;
   target.style.top = `${y}px`;
 }
 
 function onTargetClick(target) {
+  clearTimeout(timeoutId);
   moveTarget(target);
   count++;
-  countDisplay.textContent = count;
+  countDisplay.textContent = "Contador:" + count;
+  startTimeout(target);
+}
+function startTimeout(target) {
+  timeoutId = setTimeout(() => {
+    target.remove();
+    alert("defeat");
+  }, 800);
 }
