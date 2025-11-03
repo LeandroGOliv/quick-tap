@@ -3,6 +3,7 @@ const menu = document.getElementById("menu");
 const modeButton = document.getElementById("gameMode");
 const timeModeButton = document.getElementById("timeMode");
 const countDisplay = document.getElementById("countDisplay");
+const soundEffect = document.getElementById("soundEffect");
 let isStarted = false;
 let count = 0;
 let timeoutId;
@@ -61,6 +62,7 @@ function moveTarget(targetContainer) {
 }
 
 function onTargetClick(targetContainer) {
+  soundEffect.play();
   clearTimeout(timeoutId);
   moveTarget(targetContainer);
   count++;
