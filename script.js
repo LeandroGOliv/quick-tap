@@ -30,7 +30,7 @@ function toggleTimeMode() {
 }
 
 function startGame() {
-  countDisplay.style.visibility = "visible";
+  countDisplay.style.display = "block";
   countDisplay.textContent = "Contador: 0";
   const targetContainer = document.createElement("div");
   targetContainer.id = "targetContainer";
@@ -65,6 +65,9 @@ function onTargetClick(targetContainer) {
   moveTarget(targetContainer);
   count++;
   countDisplay.textContent = "Contador: " + count;
+  if (timeModeButton.textContent === "Infinite") {
+    startTimeout(targetContainer);
+  }
 }
 function startTimeout(targetContainer) {
   let duration;
@@ -81,16 +84,19 @@ function startTimeout(targetContainer) {
     timeoutId = setTimeout(() => {
       targetContainer.remove();
       alert(`Time is up!. \nYour score: ${count}`);
-      countDisplay.style.visibility = "hidden";
+      countDisplay.style.display = "none";
       count = 0;
       menu.style.display = "block";
     }, duration);
   } else {
     duration = 2000;
-    const targetTimeBar = document.createElement("div");
-    targetTimeBar.id = "targetTimeBar";
-    targetContainer.appendChild(targetTimeBar);
-    targetTimeBar.className = "targetTimeBar";
+    let targetTimeBar = document.getElementById("targetTimeBar");
+    if (!targetTimeBar) {
+      targetTimeBar = document.createElement("div");
+      targetTimeBar.id = "targetTimeBar";
+      targetTimeBar.className = "targetTimeBar";
+      targetContainer.appendChild(targetTimeBar);
+    }
     targetTimeBar.style.animation = "none";
     targetTimeBar.offsetHeight;
     targetTimeBar.style.animation = `shrinkBar ${duration}ms linear forwards`;
@@ -98,6 +104,8 @@ function startTimeout(targetContainer) {
   timeoutId = setTimeout(() => {
     targetContainer.remove();
     alert(`Defeat\nYour score: ${count}`);
+    countDisplay.style.display = "none";
+    menu.style.display = "block";
   }, duration);
 }
 // separar em mais funcoes
