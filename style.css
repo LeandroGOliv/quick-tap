@@ -5,9 +5,7 @@
 }
 
 body {
-  margin-top: 26px;
   font-family: sans-serif;
-  text-align: center;
   background: #282a36;
 }
 
@@ -16,6 +14,29 @@ button {
   font-size: 18px;
   background: #ff79c6;
   color: #fafafa;
+}
+
+#gameArea {
+  display: none;
+  position: fixed;
+  inset: 6%;
+  background-image: linear-gradient(
+      to right,
+      rgba(68, 68, 68, 0.3) 1px,
+      transparent 1px
+    ),
+    linear-gradient(to bottom, rgba(85, 85, 85, 0.3) 1px, transparent 1px);
+  background-size: 140px 140px;
+  background-position: center;
+}
+
+#gameArea.microAdjustment {
+  inset: 37%;
+  background-size: 70px 70px;
+}
+
+#gameArea.active {
+  display: block;
 }
 
 #timeBar {
@@ -43,7 +64,15 @@ button {
   }
 }
 
-#countDisplay {
+#scoreContainer {
+  display: none;
+}
+
+#scoreContainer.active {
+  display: block;
+}
+
+#score {
   color: #ff79c6;
 }
 
@@ -58,6 +87,11 @@ button {
   justify-content: space-between;
 }
 
+.targetContainer.micro {
+  width: 30px;
+  height: 35px;
+}
+
 .normalTarget {
   width: 50px;
   height: 50px;
@@ -67,5 +101,11 @@ button {
   flex-shrink: 0;
 }
 
-/* .miniTarget {
-} */
+.microTarget {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #c59dfd, #35175e);
+  box-shadow: 0 0 4px rgba(61, 61, 61, 0.3);
+  flex-shrink: 0;
+}

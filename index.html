@@ -7,13 +7,18 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
+    <!-- na div pai do menu/tela inicial vai ter q ter um z-index maior que o game
+    area -->
     <div id="menu">
       <h1 style="color: white">Quick tap!</h1>
       <button id="start">Start!</button>
       <button id="gameMode"></button>
       <button id="timeMode"></button>
     </div>
-    <p id="countDisplay"></p>
+    <div id="scoreContainer">
+      <p style="color: #ff79c6">Score: <span id="score"></span></p>
+    </div>
+    <div id="gameArea"></div>
 
     <audio id="soundEffect" src="assets/bubble-pop.mp3"></audio>
     <script src="script.js"></script>
